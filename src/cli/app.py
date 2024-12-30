@@ -1,9 +1,9 @@
 import curses
 
-from field import Field
+from game.components.field import Field
 
 
-class Interface:
+class App:
 
     def __init__(self):
         self.stdscr = curses.initscr()
@@ -31,3 +31,8 @@ class Interface:
 
     def grab_input(self):
         return self.stdscr.getch()
+
+    def quit(self):
+        self.stdscr.erase()
+        curses.endwin()
+        exit(0)

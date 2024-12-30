@@ -1,6 +1,6 @@
 import hashlib
 
-from field import Field
+from game.components.field import Field
 
 
 class Validator:
@@ -11,7 +11,10 @@ class Validator:
     def validate(self, field: list[list[int]]):
         self.errors = []
 
-        rotated = Field.rotate_field(field)
+        if Field.is_incomplete(field):
+            return None, self.errors
+
+        rotated = Field.rotate_ccw(field)
 
         self._validate_no_two_equal_lines(field)
         self._validate_no_two_equal_lines(rotated)
@@ -47,6 +50,8 @@ class Validator:
         cnt = 0
         cur = None
         for x in line:
+            if x == 0:
+                return False  # Quit if unknown char found
             if x == cur:
                 cnt += 1
             else:

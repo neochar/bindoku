@@ -1,0 +1,2 @@
+class FieldNotSolvableException(Exception):
+    pass
