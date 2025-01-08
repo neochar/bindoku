@@ -1,4 +1,5 @@
 from game.components.cell import Cell
+from game.utils.path import get_path
 
 
 class Field:
@@ -42,7 +43,7 @@ class Field:
     @staticmethod
     def get_valid_field(field_size: int):
         with open(
-                '../data/fields/' + f'{field_size}x{field_size}.dat',
+                get_path('../data/fields/' + f'{field_size}x{field_size}.dat'),
                 'r'
         ) as f:
             lines = f.readlines()

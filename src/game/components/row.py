@@ -7,11 +7,18 @@ class Row:
     row: list[int]
     side_len: int
     empty_cells: list[int]
+    count_1: int
+    count_2: int
 
     def set_row(self, _row: list[int]):
         self.row = _row
         self.side_len = len(_row)
         self.empty_cells = Field.get_row_empty_cells(_row)
+        self._count_cells()
+
+    def _count_cells(self):
+        self.count_1 = self.row.count(1)
+        self.count_2 = self.row.count(2)
 
     @classmethod
     def from_row(cls, _row: list[int]) -> Self:

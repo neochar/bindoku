@@ -1,19 +1,22 @@
+import copy
 import random
 from typing import Callable
 
 from game.components.field import Field
-from game.puzzleizer import Puzzleizer
+from game.puzzler import Puzzler
 from game.validator import Validator
 
 
 class Generator:
     # TODO move props here
-    puzzleizer: Puzzleizer or None = None
+    puzzleizer: Puzzler or None = None
+    render_callback: Callable or None = None
+    field_size: int or None
 
     def __init__(
             self,
             validator: Validator,
-            render_callback: Callable,  # for debug
+            render_callback: Callable or None = None,  # for debug
             seed: int = 1
     ):
         self.validator = validator
@@ -23,7 +26,7 @@ class Generator:
         self.render_callback = render_callback
         random.seed(self.seed)
 
-    def set_puzzleizer(self, puzzleizer: Puzzleizer):
+    def set_puzzleizer(self, puzzleizer: Puzzler):
         self.puzzleizer = puzzleizer
 
     def generate(self, field_size: int, seed: int = None) -> list[list[int]]:
@@ -42,7 +45,7 @@ class Generator:
         if self.puzzleizer is None:
             return
 
-        self.field = self.puzzleizer.puzzleize(self.field)
+        return self.puzzleizer.puzzle(copy.deepcopy(self.field))
 
     def _initialize(self):
         self.field = Field.get_valid_field(self.field_size // 2)

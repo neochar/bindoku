@@ -7,7 +7,7 @@ from game.const import MAX_MOVES
 from game.errors import FieldNotSolvableException
 from game.components.field import Field
 from game.generator import Generator
-from game.puzzleizer import Puzzleizer
+from game.puzzler import Puzzler
 from game.solver import Solver
 from game.validator import Validator
 
@@ -112,8 +112,8 @@ class Game:
                 self.generator.puzzleizer = None
                 self.generate_field()
             else:
-                self.generator.set_puzzleizer(Puzzleizer(Solver(self.validator)))
-                self.generator.puzzleize()
+                self.generator.set_puzzleizer(Puzzler(Solver(self.validator)))
+                self.field = self.generator.puzzleize()
 
         if c == ord('s'):
             self.messages = []
