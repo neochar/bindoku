@@ -11,7 +11,7 @@ app = FastAPI()
 
 
 @app.get("/api/get-board/{sidelen}")
-def get_board(sidelen: int, seed: Union[int, None] = None):
+def get_board(sidelen: int, seed: int = 1):
     validator = Validator()
     solver = Solver(validator=validator)
     generator = Generator(validator=validator)
@@ -24,7 +24,7 @@ def get_board(sidelen: int, seed: Union[int, None] = None):
     }
 
 
-def _prepare_for_app(field: list[list[int]]) -> list[list[int or None]]:
+def _prepare_for_app(field: list[list[int or None]]) -> list[list[int or None]]:
     for y, row in enumerate(field):
         for x, col in enumerate(row):
             if col == 0:

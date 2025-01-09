@@ -24,7 +24,6 @@ class Generator:
         self.seed = seed  # TODO make seed generator for non-local env
         self.field_size = None
         self.render_callback = render_callback
-        random.seed(self.seed)
 
     def set_puzzleizer(self, puzzleizer: Puzzler):
         self.puzzleizer = puzzleizer
@@ -32,6 +31,7 @@ class Generator:
     def generate(self, field_size: int, seed: int = None) -> list[list[int]]:
         if seed is not None:
             self.seed = seed
+            random.seed(self.seed)
 
         self.field_size = field_size
 
