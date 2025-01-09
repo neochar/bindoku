@@ -4,7 +4,6 @@ from game.errors import FieldNotSolvableException
 from game.solver.equalrowschecker import EqualRowsChecker
 from game.solver.exclusionchecker import ExclusionChecker
 from game.solver.rowchecker import RowChecker
-from game.utils.logger import file_log, cleanup_logs
 from game.validator import Validator
 
 
