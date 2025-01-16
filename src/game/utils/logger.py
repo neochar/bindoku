@@ -19,7 +19,7 @@ def cleanup_logs():
             file_log(0, 'error', 'Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-def file_log(move, prefix='move', key=None, data=None):
+def file_log(i, prefix='tick', key=None, data=None):
     s = StringIO()
 
     if data is not None:
@@ -31,7 +31,7 @@ def file_log(move, prefix='move', key=None, data=None):
     path = get_path(f'../log')
     Path(path).mkdir(parents=True, exist_ok=True)
 
-    with open(f'{path}/{prefix}-{move}.log', 'a') as f:
+    with open(f'{path}/{prefix}-{i}.log', 'a') as f:
         f.write(datetime.now().strftime('%d.%m.%Y %H:%M:%S') + '\n')
         if key is not None:
             f.write(f'[{key}]\n')

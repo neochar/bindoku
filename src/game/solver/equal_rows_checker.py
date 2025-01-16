@@ -2,8 +2,8 @@ from typing import Self
 
 from game.components.cell import Cell
 from game.components.field import Field
-from game.components.row import Row
 from game.const import EQUALITY_MIN_CELLS_COUNT
+from game.utils.logger import file_log
 
 
 class EqualRowsChecker:
@@ -54,7 +54,10 @@ class EqualRowsChecker:
         return equalities
 
     def _fill_empty(self, y, empty_cells, filled_row):
+        file_log(y, prefix='fill_empty', data=[self.field[y], filled_row, empty_cells])
         for index in empty_cells:
+            if self.field[y][index] != 0:
+                continue
             self.field[y][index] = Cell.invert(
                 filled_row[index]
             )

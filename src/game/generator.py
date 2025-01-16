@@ -48,7 +48,7 @@ class Generator:
         return self.puzzleizer.puzzle(copy.deepcopy(self.field))
 
     def _initialize(self):
-        self.field = Field.get_valid_field(self.field_size // 2)
+        self.field = Field.get_valid_field(self.field_size)
 
     def _randomize(self):
         for _ in range(random.randint(1, 100)):

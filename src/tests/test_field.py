@@ -29,7 +29,7 @@ class TestField(unittest.TestCase):
             Field.rotate_ccw(self._get_field()),
         )
 
-    def test_rotate_cw(self):
+    def test_rotate_cw_6(self):
         expected = [
             [2, 2, 1, 0, 1, 1],
             [1, 1, 0, 0, 2, 2],
@@ -41,6 +41,37 @@ class TestField(unittest.TestCase):
         self.assertEqual(
             expected,
             Field.rotate_cw(self._get_field()),
+        )
+
+    def test_rotate_cw_10(self):
+        field = [
+            [0, 0, 1, 0, 0, 0, 1, 0, 1, 0],
+            [2, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 1, 0, 0, 2, 0, 0, 0, 1],
+            [2, 0, 0, 1, 0, 0, 0, 0, 2, 0],
+            [0, 0, 0, 0, 2, 0, 0, 0, 0, 2],
+            [0, 2, 0, 0, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 2, 2, 0, 2, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+            [2, 0, 0, 1, 0, 0, 0, 0, 2, 0],
+            [2, 0, 0, 1, 1, 0, 0, 0, 0, 0]
+        ]
+        expected = [
+            [0, 0, 1, 0, 2, 0, 0, 0, 0, 0],
+            [1, 0, 0, 2, 0, 1, 0, 0, 2, 0],
+            [0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+            [0, 1, 2, 0, 0, 0, 2, 0, 0, 0],
+            [0, 0, 0, 0, 2, 0, 2, 0, 0, 1],
+            [0, 0, 0, 1, 0, 0, 0, 0, 1, 1],
+            [1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+            [0, 2, 0, 2, 0, 0, 0, 0, 2, 2]
+        ]
+
+        self.assertEqual(
+            expected,
+            Field.rotate_ccw(field)
         )
 
     def test_invert_field(self):

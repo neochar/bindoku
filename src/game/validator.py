@@ -39,18 +39,18 @@ class Validator:
     def _validate_no_more_than_two(self, field: list[list[int]]):
         field_size = Field.get_field_size(field)
         for y in range(field_size):
-            if not self.validate_line(field[y]):
+            if not self.validate_row(field[y]):
                 self.errors.append(
                     'There cannot be more than two elements of the same color in a row'
                 )
                 return
 
     @staticmethod
-    def validate_line(line: list[int]):
+    def validate_row(row: list[int], force_check: bool = False):
         cnt = 0
         cur = None
-        for x in line:
-            if x == 0:
+        for x in row:
+            if x == 0 and not force_check:
                 return False  # Quit if unknown char found
             if x == cur:
                 cnt += 1
@@ -65,6 +65,6 @@ class Validator:
         return True
 
     def do_asserts(self):
-        for i in range(2, 4):
+        for i in range(4, 12 + 1, 2):
             field = Field.get_valid_field(i)
             assert self.validate(field)[0] is True

@@ -2,10 +2,10 @@ import os
 import sys
 import typing
 
-from game.configurator import Configurator
-from game.const import MAX_MOVES
-from game.errors import FieldNotSolvableException
 from game.components.field import Field
+from game.configurator import Configurator
+from game.const import MAX_TICKS
+from game.errors import FieldNotSolvableException
 from game.generator import Generator
 from game.puzzler import Puzzler
 from game.solver import Solver
@@ -43,8 +43,21 @@ class Game:
         self.field = []
 
     def run(self):
-        if len(self.field) < 1:
-            self.generate_field()
+        # if len(self.field) < 1:
+        #     self.generate_field()
+        self.field = [
+            [0, 0, 1, 0, 0, 0, 1, 0, 1, 0],
+            [2, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 1, 0, 0, 2, 0, 0, 0, 1],
+            [2, 0, 0, 1, 0, 0, 0, 0, 2, 0],
+            [0, 0, 0, 0, 2, 0, 0, 0, 0, 2],
+            [0, 2, 0, 0, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 2, 2, 0, 2, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+            [2, 0, 0, 1, 0, 0, 0, 0, 2, 0],
+            [2, 0, 0, 1, 1, 0, 0, 0, 0, 0]
+        ]
+        self.field_size = 5 * 2
 
         self.render_field()
 
@@ -105,6 +118,12 @@ class Game:
         if c == ord('4'):
             self.field_size = 4 * 2
             self.generate_field()
+        if c == ord('5'):
+            self.field_size = 5 * 2
+            self.generate_field()
+        if c == ord('6'):
+            self.field_size = 6 * 2
+            self.generate_field()
 
     def handle_input_game(self, c):
         if c == ord('p'):
@@ -120,10 +139,11 @@ class Game:
             try:
                 moves, self.field = self.solver.solve(
                     self.field,
-                    max_moves=MAX_MOVES
+                    max_ticks=MAX_TICKS
                 )
                 self.messages.append(f'Solved in {moves} moves')
-            except FieldNotSolvableException as e:
+            except FieldNotSolvableException:
+                self.field = self.solver.field
                 self.messages.append('Field is not solvable')
 
     def quit(self):

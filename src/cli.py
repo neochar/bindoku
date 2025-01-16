@@ -1,9 +1,13 @@
+import logging
+
+from cli.app import App
 from game.configurator import Configurator
 from game.game import Game
 from game.generator import Generator
-from cli.app import App
 from game.solver import Solver
 from game.validator import Validator
+
+logging.basicConfig(level=logging.CRITICAL)
 
 
 def run_game():
@@ -14,6 +18,7 @@ def run_game():
         validator=validator,
         render_callback=cli.render,
     )
+
     game = Game(
         cli.render,
         cli.quit,
@@ -23,6 +28,7 @@ def run_game():
         configurator=Configurator.dev(),
         solver=solver
     )
+
     game.run()
 
 

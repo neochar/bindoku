@@ -1,3 +1,4 @@
+import copy
 from typing import Self
 
 from game.components.field import Field
@@ -11,7 +12,7 @@ class Row:
     count_2: int
 
     def set_row(self, _row: list[int]):
-        self.row = _row
+        self.row = copy.deepcopy(_row)
         self.side_len = len(_row)
         self.empty_cells = Field.get_row_empty_cells(_row)
         self._count_cells()
