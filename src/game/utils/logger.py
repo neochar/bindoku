@@ -6,10 +6,12 @@ from game.utils.path import get_path
 
 
 def cleanup_logs():
-    import os, shutil
-    folder = get_path('../log/')
-    for filename in os.listdir(folder):
-        file_path = os.path.join(folder, filename)
+    import os
+    import shutil
+
+    path = get_path('../log/')
+    for filename in os.listdir(path):
+        file_path = os.path.join(path, filename)
         try:
             if os.path.isfile(file_path) or os.path.islink(file_path):
                 os.unlink(file_path)
